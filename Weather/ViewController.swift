@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     @IBOutlet weak var locationLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var temperatureLabel: UILabel!
@@ -18,13 +18,17 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var dateLabel: UILabel! //дату получаем не через запрос
     
+    var networkManager = NetworkManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        networkManager.fetchCurrentWeather(forCity: "Moscow")
     }
-
+    
     
     @IBAction func SearchAction(_ sender: UIBarButtonItem) {
+        self.presentAlertControler(withTitle: "Введите название города", message: nil, style: .alert)
     }
     
 }
