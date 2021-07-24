@@ -9,7 +9,8 @@ import UIKit
 
 extension ViewController {
     
-    func presentAlertControler(withTitle title: String?, message: String?, style: UIAlertController.Style) {
+    func presentAlertControler(withTitle title: String?, message: String?,
+                               style: UIAlertController.Style, complitionHandler: @escaping (String) -> Void) {
         let alertControler = UIAlertController(title: title, message: message, preferredStyle: style)
         alertControler.addTextField { tf in
             let cities = ["Kolpino", "Sankt Peterburg", "Ufa", "Moscow", "Krasnodar"]
@@ -20,7 +21,8 @@ extension ViewController {
             let textField = alertControler.textFields?.first
             guard let cityName = textField?.text else { return }
             if cityName != "" {
-                print("Поиск информации по \(cityName)")
+                let city = cityName.split(separator: " ").joined(separator: "%20")
+                complitionHandler(cityName)
             }
         }
         let cansel = UIAlertAction(title: "Отмена", style: .cancel)

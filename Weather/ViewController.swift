@@ -23,12 +23,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        networkManager.onComplition = { CurrentWeather in
+            print(CurrentWeather.cityName)
+        }
         networkManager.fetchCurrentWeather(forCity: "Moscow")
     }
     
     
     @IBAction func SearchAction(_ sender: UIBarButtonItem) {
-        self.presentAlertControler(withTitle: "Введите название города", message: nil, style: .alert)
+        self.presentAlertControler(withTitle: "Введите название города", message: nil, style: .alert) { city in
+            self.networkManager.fetchCurrentWeather(forCity: city)
+        }
     }
     
 }
